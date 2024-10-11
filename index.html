@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Show My IP Address</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+        }
+        h1 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        #ip {
+            font-weight: bold;
+            font-size: 22px;
+            color: #007BFF;
+            display: block;
+            margin-top: 10px;
+        }
+        .disclaimer {
+            color: #d9534f;
+            font-weight: bold;
+            margin-top: 20px;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Your IP Address is:</h1>
+        <span id="ip">Loading...</span>
+        <div class="disclaimer">
+            Disclaimer: We are monitoring and recording your IP address and location for security purposes. 
+            Please note that any fraudulent or malicious activity will be reported and may result in legal action. 
+            Do not attempt to manipulate or misuse this service. Your cooperation is appreciated.
+        </div>
+    </div>
+
+    <script>
+        fetch('https://api.ipify.org?format=json')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('ip').innerText = data.ip;
+            })
+            .catch(error => {
+                console.error('Error fetching IP:', error);
+                document.getElementById('ip').innerText = 'Unable to retrieve IP address';
+            });
+    </script>
+</body>
+</html>
